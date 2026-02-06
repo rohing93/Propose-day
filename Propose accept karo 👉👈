@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propose Day ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ---------- PAGE 1 ---------- */
+#page1 {
+  height: 100vh;
+  background: radial-gradient(circle at top, #2a2a2a, #000);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+
+.heart {
+  width: 110px;
+  height: 100px;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: pulse 1.5s infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  width: 110px;
+  height: 100px;
+  background: #ff4d6d;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before {
+  top: -55px;
+  left: 0;
+}
+
+.heart::after {
+  left: 55px;
+  top: 0;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1) rotate(-45deg); }
+  50% { transform: scale(1.2) rotate(-45deg); }
+  100% { transform: scale(1) rotate(-45deg); }
+}
+
+#page1 h1 {
+  margin: 40px 0 25px;
+  font-size: 2.3rem;
+}
+
+#proposeBtn {
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  background: #ff4d6d;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+  animation: pulse 1.8s infinite;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#proposeBtn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 25px #ff4d6d;
+}
+
+/* ---------- PAGE 2 ---------- */
+#page2 {
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffd1e8, #ffe8f2);
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  width: 90%;
+  max-width: 900px;
+  height: 450px;
+  display: flex;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.card-left {
+  width: 50%;
+  background: url("https://via.placeholder.com/600x600?text=Love") center/cover no-repeat;
+}
+
+.card-right {
+  width: 50%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+
+.card-right h2 {
+  color: #ff4d6d;
+  margin-bottom: 20px;
+}
+
+.card-right p {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ---------- CONFETTI ---------- */
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  top: -10px;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    height: auto;
+  }
+  .card-left,
+  .card-right {
+    width: 100%;
+    height: 250px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<section id="page1">
+  <div class="heart"></div>
+  <h1>Sneha, will you be mine forever?</h1>
+  <button id="proposeBtn">Yes, of course!!</button>
+</section>
+
+<!-- PAGE 2 -->
+<section id="page2">
+  <div class="card">
+    <div class="card-left"></div>
+    <div class="card-right">
+      <h2>My Love ❤️</h2>
+      <p>
+        Meeting you was fate, becoming your friend was a choice,
+        but falling in love with you was beyond my control.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+const btn = document.getElementById("proposeBtn");
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+
+btn.addEventListener("click", () => {
+  page1.style.display = "none";
+  page2.style.display = "flex";
+  launchConfetti();
+});
+
+function launchConfetti() {
+  for (let i = 0; i < 90; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.background =
+      `hsl(${Math.random() * 360}, 100%, 70%)`;
+    confetti.style.animationDuration =
+      (Math.random() * 2 + 2) + "s";
+
+    document.body.appendChild(confetti);
+
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+</script>
+
+</body>
+</html>
